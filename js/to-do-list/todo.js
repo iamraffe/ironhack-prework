@@ -16,12 +16,27 @@ window.onload = function() {
     // add your code here
     // this should create a new list item in the to-do list
     // and set the text as the input from the todo-input field
+    var toDoText = document.createTextNode(document.getElementById("todo-input").value);
+    var toDoList = document.querySelector('ul.todo-list-items');
+    var toDoItem = document.createElement("li");
+    toDoItem.appendChild(toDoText);
+    toDoList.appendChild(toDoItem);
+    document.getElementById("todo-input").value = '';
   }
 
   function markAsDone() {
-    doneButton.classList.add('liked');
-    doneButton.innerHTML = "Liked!";
-    document.querySelector('h1').style.color = "red";
+    if(document.getElementsByClassName('todo-list-items')[0].children.length > 1){
+      doneButton.classList.add('liked');
+      doneButton.innerHTML = "Liked!";
+      document.querySelector('h1').style.color = "red";
+      var doneList = document.querySelector('ul.done-list-items');
+      var doneItem = document.querySelector('ul.todo-list-items > li');
+      doneItem.setAttribute("class", "done");
+      doneList.appendChild(doneItem);
+    }
+    else{
+      alert("No more items in to do list, my friend");
+    }
   }
-  
+
 }
